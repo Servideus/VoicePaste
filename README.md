@@ -1,33 +1,37 @@
-# VoicePaste — Windows beta 1.1.5
+[Инструкция на русском языке здесь](README.ru.md).
 
-Удерживайте горячую клавишу, произнесите фразу и отпустите клавиши. VoicePaste записывает микрофон, отправляет WAV в Gemini и вставляет обработанный текст в активное окно. Интерфейс приложения — на русском.
+# VoicePaste
 
-## Запуск готовой сборки
+Windows push-to-talk dictation with Gemini transcription and automatic paste. Hold a shortcut, speak and release it. VoicePaste records microphone audio, sends a WAV file to Gemini and inserts the processed text into the active window. The application interface is in Russian.
 
-[Скачать релиз 1.1.5-beta](https://github.com/Servideus/VoicePaste/releases/tag/v1.1.5-beta). Архив содержит EXE и тексты лицензий зависимостей.
+## Status and download
 
-Windows 10/11 x64. Python для EXE не требуется. Запустите `release/1.1.5/VoicePaste.exe`; приложение появляется в системном трее, отдельного главного окна нет. Сборка не подписана Authenticode. Не отключайте защиту Windows ради запуска.
+Windows beta 1.1.5. [Download v1.1.5-beta](https://github.com/Servideus/VoicePaste/releases/tag/v1.1.5-beta). The archive includes the executable and dependency license texts.
 
-1. Откройте меню значка → «Настройки...». Введите собственный Gemini API-ключ и нажмите «Сохранить ключ».
-2. Выберите модель. «Проверить» обращается к API и проверяет доступность модели; успешный ответ не гарантирует квоту на распознавание.
-3. Нажмите OK, откройте Блокнот, удерживайте Ctrl+Shift и говорите 2–3 секунды. После отпускания дождитесь вставки.
+Requires Windows 10/11 x64. Python is not required for the packaged executable. Run `release/1.1.5/VoicePaste.exe`; the app appears in the system tray without a main window. The executable is not Authenticode-signed. Do not disable Windows protection to run it.
 
-Распознавание требует интернета и доступного Gemini API. Аудио передаётся Google; это не offline-распознавание. Запросы могут расходовать API-квоту. Приложение приводит русскую речь к письменному виду: исправляет пунктуацию, убирает повторы и слова-паразиты. Исключение: Transcribe verbatim сохраняет произнесённые повторы и слова-паразиты.
+## Quick start
 
-## Настройки и данные
+1. Open the tray menu and select Settings. Enter your own Gemini API key and save it.
+2. Choose a model. The Check button makes an API request to check availability; success does not guarantee transcription quota.
+3. Open Notepad, hold Ctrl+Shift and speak for two or three seconds. Release the keys and wait for the text.
 
-- Горячая клавиша по умолчанию: Ctrl+Shift. Можно выбрать сочетание с буквой или F-клавишей. Ctrl+Shift может переключать раскладку Windows; при конфликте задайте другое сочетание.
-- Новая установка выбирает `gemini-3.5-flash-lite`. В меню четыре варианта с медианой менее 5 секунд, от самой быстрой к самой медленной. Transcribe работает в режиме verbatim. Сохранённый выбор удалённой модели при загрузке заменяется на Flash Lite 3.5. Порядок и замеры — в [docs/models.md](docs/models.md).
-- При ошибке или пустом ответе автоматически проверяются следующие модели, включая возврат к началу списка. Каждая получает одну попытку на запись; первая успешная отвечает. Выбор в настройках сохраняется. Если все модели откажут, появится общая ошибка.
-- Конфигурация: `%APPDATA%/VoicePaste/config.json`. API-ключ хранится отдельно, через keyring в Windows Credential Manager.
-- Лог без сохранения WAV и текста транскрипции: `%LOCALAPPDATA%/VoicePaste/logs/voicepaste.log`. Лог содержит время, размеры записи и ошибки. Проверяйте его перед передачей другим людям.
-- Левая кнопка значка переключает паузу; правая открывает меню. «Выход» отключает горячую клавишу.
+Internet access and an available Gemini API are required. Audio is sent to Google; requests may consume API quota. The app edits Russian speech into written text, correcting punctuation and removing repetitions and fillers. Transcribe verbatim preserves spoken repetitions and fillers.
 
-Список моделей и доступность могут измениться: [официальные модели](https://ai.google.dev/gemini-api/docs/models), [отключения](https://ai.google.dev/gemini-api/docs/deprecations).
+## Settings and data
 
-## Установка из исходников
+- Default shortcut: Ctrl+Shift. You can choose a letter or function-key combination. If Ctrl+Shift switches your Windows keyboard layout, choose another shortcut.
+- New installations select `gemini-3.5-flash-lite`. The menu contains four models with measured median latency below five seconds, ordered from fastest to slowest. Transcribe uses verbatim mode. A saved model removed from the menu is replaced with Flash Lite 3.5. See [model settings and measurements](docs/models.md).
+- Errors and empty responses trigger the next model, wrapping to the beginning of the list. Each model gets one attempt per recording. The first successful result is used; the selected setting is retained. If all fail, the app reports an error.
+- Configuration: `%APPDATA%/VoicePaste/config.json`. The API key is stored separately through keyring in Windows Credential Manager.
+- Log: `%LOCALAPPDATA%/VoicePaste/logs/voicepaste.log`. WAV files and transcript text are not saved in the log; timing, recording sizes and errors are recorded. Review logs before sharing them.
+- Left-click the tray icon to toggle pause; right-click for the menu. Exit unregisters the shortcut.
 
-Проверено с Python 3.12 x64. Из корня проекта:
+Model availability may change. See Google's [model documentation](https://ai.google.dev/gemini-api/docs/models) and [deprecations](https://ai.google.dev/gemini-api/docs/deprecations).
+
+## Run from source
+
+Verified with Python 3.12 x64. From the repository root:
 
 ```powershell
 py -3.12 -m venv voicepaste/.venv
@@ -35,27 +39,27 @@ py -3.12 -m venv voicepaste/.venv
 ./run.ps1
 ```
 
-`requirements-lock.txt` фиксирует проверенное окружение с тестовыми и сборочными инструментами. Для установки только приложения используйте `voicepaste/requirements.txt`.
+`requirements-lock.txt` records the tested environment, including test/build tools. For runtime-only dependencies, use `voicepaste/requirements.txt`.
 
-## Тесты и сборка
+## Tests and build
 
 ```powershell
 ./voicepaste/.venv/Scripts/python.exe -m pytest voicepaste/tests -q
 ./build.ps1 -DistPath release/1.1.5
 ```
 
-`build.ps1` запускает тесты, собирает тексты лицензий зависимостей, создаёт EXE и выводит SHA-256. Канонический spec — `VoicePaste.spec`; старый `voicepaste/build.spec` перенаправляет на него. Сборка не зависит от текущего каталога запуска скрипта. Диагностическая консоль: задайте `$env:VOICEPASTE_DEBUG_CONSOLE='1'` перед сборкой; обычная сборка идёт без консоли.
+`build.ps1` runs tests, collects dependency license texts, builds the executable and prints SHA-256. `VoicePaste.spec` is canonical; `voicepaste/build.spec` redirects to it. The build script is independent of the invoking working directory. Set `$env:VOICEPASTE_DEBUG_CONSOLE='1'` before building to include a diagnostic console; normal builds have none.
 
-Старый `dist/VoicePaste.exe` не обновляется и оставлен для возврата. Для новой версии используйте `release/1.1.5/VoicePaste.exe`.
+The old `dist/VoicePaste.exe` is retained as a recovery option and is not updated. Use `release/1.1.5/VoicePaste.exe` for this version.
 
-## Ограничения беты
+## Beta limitations
 
-[Сравнение всех 15 пунктов меню по скорости и качеству](benchmark/2026-10-04/report.md): После теста пользовательской записи оставлены Transcribe verbatim, Flash Lite 3.5, Flash 3.6 и Flash Lite Latest. Сохранённый выбор сохраняется, если модель осталась в меню.
+The [benchmark of all fifteen model choices](benchmark/2026-10-04/report.md) documents speed and quality. After testing the user's recording, the menu retained Transcribe verbatim, Flash Lite 3.5, Flash 3.6 and Flash Lite Latest. Saved selections remain if the model is still available in the menu.
 
-Вставка использует текстовый буфер и Ctrl+V; предыдущий текст буфера восстанавливается. При сбое доступен Unicode SendInput. Приложение не может гарантировать, что стороннее окно приняло текст; вставка в повышенные или защищённые окна может блокироваться Windows. Начните проверку с обычного Блокнота.
+Insertion uses the text clipboard and Ctrl+V, then restores the previous clipboard text. Unicode SendInput is the fallback. The app cannot guarantee that a third-party window accepted the text; Windows may block insertion into elevated or protected windows. Start with ordinary Notepad.
 
-API-проверка и тесты с подменённым ответом не заменяют ручную проверку голоса и вставки в нужное приложение. [Протокол проверки](docs/verification.md) отделяет автоматические проверки от оставшегося пользовательского сценария.
+API checks and mocked tests do not replace manual voice and insertion checks in the target application. The [verification report](docs/verification.md) separates automated checks from the remaining user scenario.
 
-## Лицензия
+## License
 
-Код VoicePaste: [MIT](LICENSE). Qt/PySide6 и другие зависимости сохраняют собственные лицензии; тексты и версии находятся в `third_party_licenses`, сведения о Qt — в [THIRD_PARTY.md](THIRD_PARTY.md). Личные ключи, базы и настройки не должны входить в распространяемый архив.
+VoicePaste code: [MIT](LICENSE). Qt/PySide6 and other dependencies retain their respective licenses. Texts and versions are in `third_party_licenses`; Qt details are in [THIRD_PARTY.md](THIRD_PARTY.md). Personal keys, databases and settings must not be included in distributed archives.
