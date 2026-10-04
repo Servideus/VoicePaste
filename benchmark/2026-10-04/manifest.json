@@ -1,0 +1,21 @@
+{
+  "created_utc": "2026-10-03T19:22:13.394393+00:00",
+  "python": "3.12.3 (tags/v3.12.3:f6650f9, Apr  9 2024, 14:05:25) [MSC v.1938 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "requests": 72,
+  "model_count": 15,
+  "source_sha256": {
+    "voicepaste\\src\\voicepaste\\gemini.py": "765e466ba1cfc6426a9714d46f667b1c89cdfb3701c68e64164f42e232f91433",
+    "voicepaste\\src\\voicepaste\\settings.py": "602f616a893666be565ccf9f1b1b5882ff5422f95ac54c0935e39b332e79bae2",
+    "tools\\benchmark_models.py": "32d5d94cebda3ae11a32d1537a46ba0f47ac0b5afbb2ca8d73600c3ff90a0a95",
+    "benchmark\\2026-10-04\\corpus.json": "6b6ec75d26056fc25b941c68fad5c097179c73796dbe6acc840948176b88d31e",
+    "benchmark\\2026-10-04\\plan.md": "ed039f4f91a6348f0ab2b2fe50ca5f1516fdbe0a4cfaa6cdf7b422d3f2ab5dfc",
+    "benchmark/2026-10-04/plan.md": "9c20ef73c24a7959ce20c662a1d5a96939861444d0442251cd54a5b0271b4acd"
+  },
+  "audio_sha256": {
+    "facts-clean.wav": "7327068f56c9b60f9330963e7741c3be6fe337a645600c0d4c1ad5bab58241bf",
+    "facts.wav": "cbe3020c4d4b72fbba7e7f388e731c85d0d1d5dcb1e111dc9cb01fd9739a565d",
+    "instructions.wav": "e7314fe1199a5438423270dede9499ea40253669d1a81d1e35113f745f7a819c",
+    "short.wav": "42438c2b63fa57f70a1d81f18c91cf19abd18f49da42825854a8d6f664e5cd1c"
+  }
+}

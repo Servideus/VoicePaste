@@ -1,0 +1,21 @@
+.venv/
+**/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+build/
+dist/
+release/
+.env
+.env.*
+*.log
+config.json
+tmp_*.txt
+release-debug/
+*.zip
+
+# Local private benchmarks
+benchmark/**/user-audio-*/
+*.ogg
+*.mp3
+*.m4a

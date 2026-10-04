@@ -1,0 +1,92 @@
+{
+  "variant": "verbatim_ru_repeat",
+  "config": {
+    "mode": {
+      "type": "verbatim"
+    },
+    "language_codes": [
+      "ru-RU"
+    ]
+  },
+  "status": 200,
+  "seconds": 1.396,
+  "response": {
+    "status": "completed",
+    "usage": {
+      "total_tokens": 337,
+      "total_input_tokens": 337,
+      "input_tokens_by_modality": [
+        {
+          "modality": "text",
+          "tokens": 1
+        },
+        {
+          "modality": "audio",
+          "tokens": 336
+        }
+      ],
+      "total_cached_tokens": 0,
+      "total_output_tokens": 0,
+      "total_tool_use_tokens": 0,
+      "total_thought_tokens": 0,
+      "raw_prompt_token": 747,
+      "model_invocation_token_counts": [
+        {
+          "prompt_tokens_details": [
+            {
+              "modality": "text",
+              "tokens": 411
+            },
+            {
+              "modality": "audio",
+              "tokens": 336
+            }
+          ],
+          "candidates_tokens_details": [
+            {
+              "modality": "text",
+              "tokens": 45
+            }
+          ]
+        }
+      ],
+      "non_grounding_model_invocation_token_counts": [
+        {
+          "prompt_tokens_details": [
+            {
+              "modality": "text",
+              "tokens": 411
+            },
+            {
+              "modality": "audio",
+              "tokens": 336
+            }
+          ],
+          "candidates_tokens_details": [
+            {
+              "modality": "text",
+              "tokens": 45
+            }
+          ]
+        }
+      ]
+    },
+    "created": "2026-10-03T21:23:06Z",
+    "updated": "2026-10-03T21:23:06Z",
+    "service_tier": "standard",
+    "steps": [
+      {
+        "content": [
+          {
+            "text": "Не отправляй письмо Марии сегодня. Перенеси встречу с четверга на пятницу на 15:30. Старый файл не удаляй, сначала создай резервную копию.",
+            "type": "text"
+          }
+        ],
+        "type": "model_output"
+      }
+    ],
+    "object": "interaction",
+    "model": "gemini-3.5-transcribe"
+  },
+  "text": "Не отправляй письмо Марии сегодня. Перенеси встречу с четверга на пятницу на 15:30. Старый файл не удаляй, сначала создай резервную копию."
+}

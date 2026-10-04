@@ -1,0 +1,21 @@
+{
+  "variant": "verbatim_ru",
+  "config": {
+    "mode": {
+      "type": "verbatim"
+    },
+    "language_codes": [
+      "ru-RU"
+    ]
+  },
+  "extras": {},
+  "status": 429,
+  "seconds": 0.935,
+  "response": {
+    "error": {
+      "message": "Rate limit exceeded for model gemini-3.5-transcribe (limit: 3 requests per minute on Free Tier). Please retry in 23s or upgrade your tier at https://ai.dev/rate-limit.",
+      "code": "too_many_requests"
+    }
+  },
+  "text": ""
+}

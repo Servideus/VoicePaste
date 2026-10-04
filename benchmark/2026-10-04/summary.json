@@ -1,0 +1,167 @@
+[
+  {
+    "model": "gemini-2.5-flash",
+    "successes": 3,
+    "attempts": 3,
+    "median_seconds": 3.597,
+    "max_seconds": 4.614,
+    "wer": 0.0,
+    "missing_facts": [],
+    "errors": []
+  },
+  {
+    "model": "gemini-2.5-flash-lite",
+    "successes": 3,
+    "attempts": 3,
+    "median_seconds": 4.161,
+    "max_seconds": 8.137,
+    "wer": 0.0,
+    "missing_facts": [],
+    "errors": []
+  },
+  {
+    "model": "gemini-2.5-pro",
+    "successes": 0,
+    "attempts": 3,
+    "median_seconds": null,
+    "max_seconds": null,
+    "wer": null,
+    "missing_facts": [],
+    "errors": [
+      "ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.5-pro is no longer available to new users. Please update your code to use models/gemini-3.1-pro-preview for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.dev/gemini-api/docs/get-started).', 'status': 'NOT_FOUND'}}",
+      "ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.5-pro is no longer available to new users. Please update your code to use models/gemini-3.1-pro-preview for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.dev/gemini-api/docs/get-started).', 'status': 'NOT_FOUND'}}",
+      "ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.5-pro is no longer available to new users. Please update your code to use models/gemini-3.1-pro-preview for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.dev/gemini-api/docs/get-started).', 'status': 'NOT_FOUND'}}"
+    ]
+  },
+  {
+    "model": "gemini-3-flash-preview",
+    "successes": 3,
+    "attempts": 3,
+    "median_seconds": 2.639,
+    "max_seconds": 2.898,
+    "wer": 0.01282051282051282,
+    "missing_facts": [],
+    "errors": []
+  },
+  {
+    "model": "gemini-3.1-flash-lite",
+    "successes": 2,
+    "attempts": 3,
+    "median_seconds": 12.687999999999999,
+    "max_seconds": 15.642,
+    "wer": 0.0,
+    "missing_facts": [],
+    "errors": [
+      "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    ]
+  },
+  {
+    "model": "gemini-3.1-flash-lite-preview",
+    "successes": 3,
+    "attempts": 3,
+    "median_seconds": 8.943,
+    "max_seconds": 14.574,
+    "wer": 0.0,
+    "missing_facts": [],
+    "errors": []
+  },
+  {
+    "model": "gemini-3.1-pro-preview",
+    "successes": 0,
+    "attempts": 3,
+    "median_seconds": null,
+    "max_seconds": null,
+    "wer": null,
+    "missing_facts": [],
+    "errors": [
+      "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro\\n* Quota exceeded for metric: generativelanguage.googleapis.com/ge",
+      "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro\\n* Quota exceeded for metric: generativelanguage.googleap",
+      "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro\\n* Quota exceeded for metric: generativelanguage.googleap"
+    ]
+  },
+  {
+    "model": "gemini-3.5-flash",
+    "successes": 3,
+    "attempts": 3,
+    "median_seconds": 2.279,
+    "max_seconds": 2.488,
+    "wer": 0.0,
+    "missing_facts": [],
+    "errors": []
+  },
+  {
+    "model": "gemini-3.5-flash-lite",
+    "successes": 3,
+    "attempts": 3,
+    "median_seconds": 2.368,
+    "max_seconds": 2.554,
+    "wer": 0.0,
+    "missing_facts": [],
+    "errors": []
+  },
+  {
+    "model": "gemini-3.5-transcribe",
+    "successes": 3,
+    "attempts": 3,
+    "median_seconds": 2.32,
+    "max_seconds": 2.33,
+    "wer": 0.0641025641025641,
+    "missing_facts": [
+      "марии",
+      "не отправ"
+    ],
+    "errors": []
+  },
+  {
+    "model": "gemini-3.6-flash",
+    "successes": 3,
+    "attempts": 3,
+    "median_seconds": 2.862,
+    "max_seconds": 4.678,
+    "wer": 1.5384615384615385,
+    "missing_facts": [],
+    "errors": []
+  },
+  {
+    "model": "gemini-3.7-flash",
+    "successes": 2,
+    "attempts": 3,
+    "median_seconds": 17.171499999999998,
+    "max_seconds": 25.958,
+    "wer": 0.0,
+    "missing_facts": [],
+    "errors": [
+      "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    ]
+  },
+  {
+    "model": "gemini-3.8-flash",
+    "successes": 3,
+    "attempts": 3,
+    "median_seconds": 8.258,
+    "max_seconds": 9.337,
+    "wer": 0.0,
+    "missing_facts": [],
+    "errors": []
+  },
+  {
+    "model": "gemini-flash-latest",
+    "successes": 3,
+    "attempts": 3,
+    "median_seconds": 7.983,
+    "max_seconds": 12.533,
+    "wer": 0.0,
+    "missing_facts": [],
+    "errors": []
+  },
+  {
+    "model": "gemini-flash-lite-latest",
+    "successes": 3,
+    "attempts": 3,
+    "median_seconds": 2.902,
+    "max_seconds": 8.8,
+    "wer": 0.0,
+    "missing_facts": [],
+    "errors": []
+  }
+]

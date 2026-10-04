@@ -1,0 +1,93 @@
+{
+  "variant": "verbatim_disfluency",
+  "sample": "disfluency",
+  "config": {
+    "mode": {
+      "type": "verbatim"
+    },
+    "language_codes": [
+      "ru-RU"
+    ]
+  },
+  "status": 200,
+  "seconds": 1.818,
+  "response": {
+    "status": "completed",
+    "usage": {
+      "total_tokens": 315,
+      "total_input_tokens": 315,
+      "input_tokens_by_modality": [
+        {
+          "modality": "text",
+          "tokens": 1
+        },
+        {
+          "modality": "audio",
+          "tokens": 314
+        }
+      ],
+      "total_cached_tokens": 0,
+      "total_output_tokens": 0,
+      "total_tool_use_tokens": 0,
+      "total_thought_tokens": 0,
+      "raw_prompt_token": 725,
+      "model_invocation_token_counts": [
+        {
+          "prompt_tokens_details": [
+            {
+              "modality": "text",
+              "tokens": 411
+            },
+            {
+              "modality": "audio",
+              "tokens": 314
+            }
+          ],
+          "candidates_tokens_details": [
+            {
+              "modality": "text",
+              "tokens": 33
+            }
+          ]
+        }
+      ],
+      "non_grounding_model_invocation_token_counts": [
+        {
+          "prompt_tokens_details": [
+            {
+              "modality": "text",
+              "tokens": 411
+            },
+            {
+              "modality": "audio",
+              "tokens": 314
+            }
+          ],
+          "candidates_tokens_details": [
+            {
+              "modality": "text",
+              "tokens": 33
+            }
+          ]
+        }
+      ]
+    },
+    "created": "2026-10-03T21:26:37Z",
+    "updated": "2026-10-03T21:26:37Z",
+    "service_tier": "standard",
+    "steps": [
+      {
+        "content": [
+          {
+            "text": "Ну, я хочу перенести встречу на четверг. Нет, на пятницу. В общем, пожалуйста, отправь, отправь Марии новый адрес.",
+            "type": "text"
+          }
+        ],
+        "type": "model_output"
+      }
+    ],
+    "object": "interaction",
+    "model": "gemini-3.5-transcribe"
+  },
+  "text": "Ну, я хочу перенести встречу на четверг. Нет, на пятницу. В общем, пожалуйста, отправь, отправь Марии новый адрес."
+}
