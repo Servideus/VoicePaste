@@ -17,6 +17,7 @@ def tray(monkeypatch):
     qt.setQuitOnLastWindowClosed(False)
     monkeypatch.setattr(vp.HotkeyManager, "enable", lambda self: None)
     monkeypatch.setattr(vp.HotkeyManager, "disable", lambda self: None)
+    monkeypatch.setattr(vp.TrayApp, "_show_transcribe_error", lambda self, message: None)
     monkeypatch.setattr(vp, "get_api_key", lambda: "test-only")
     instance = vp.TrayApp(qt)
     yield instance, qt
@@ -100,3 +101,48 @@ def test_credential_failure_is_not_silently_accepted(monkeypatch):
     monkeypatch.setattr(settings.keyring, "set_password", fail)
     with pytest.raises(RuntimeError, match="unavailable"):
         settings.set_api_key("test-only")
+
+
+@pytest.mark.parametrize("start", [0, 2])
+def test_fallback_wraps_after_errors_and_empty_reply_then_inserts_once(tray, monkeypatch, start):
+    instance, _ = tray
+    models = [model for _, model in settings.GEMINI_MODEL_CHOICES]
+    instance.settings.gemini_model = models[start]
+    expected = models[start:] + models[:start]
+    calls, closed, inserted, errors = [], [], [], []
+    outcomes = [RuntimeError("429 quota exceeded"), RuntimeError("404 unavailable"), "  ", "Ответ"]
+    class Transcriber:
+        def __init__(self, api_key, model):
+            self.model = model
+            self.client = SimpleNamespace(close=lambda: closed.append(model))
+        def transcribe(self, audio, max_retries):
+            assert audio == b"same WAV" and max_retries == 1
+            calls.append(self.model)
+            result = outcomes[len(calls)-1]
+            if isinstance(result, Exception):
+                raise result
+            return result
+    monkeypatch.setattr(vp, "GeminiTranscriber", Transcriber)
+    monkeypatch.setattr(vp, "insert_text", lambda text: inserted.append(text))
+    instance.transcribe_error_signal.connect(errors.append)
+    instance._process_audio(b"same WAV")
+    assert calls == expected and closed == expected
+    assert inserted == ["Ответ"] and errors == []
+    assert instance.settings.gemini_model == models[start]
+    assert instance.current_status == "Idle"
+
+
+def test_all_models_fail_show_one_error_without_pasting(tray, monkeypatch):
+    instance, _ = tray
+    calls, errors = [], []
+    def unavailable(**kwargs):
+        calls.append(kwargs["model"])
+        raise TimeoutError("Connection timed out")
+    monkeypatch.setattr(vp, "GeminiTranscriber", unavailable)
+    monkeypatch.setattr(vp, "insert_text", lambda _: pytest.fail("Must not paste on failure"))
+    instance.transcribe_error_signal.connect(errors.append)
+    instance._process_audio(b"WAV")
+    assert len(calls) == len(set(calls)) == len(settings.GEMINI_MODEL_CHOICES)
+    assert len(errors) == 1 and errors[0].startswith("Все модели")
+    assert all(model in errors[0] for model in calls)
+    assert instance.current_status == "Idle"

@@ -22,7 +22,7 @@ from voicepaste.audio_recorder import AudioRecorder
 from voicepaste.gemini import GeminiTranscriber
 from voicepaste.hotkeys import HotkeyManager
 from voicepaste.injector import insert_text
-from voicepaste.settings import Settings, get_api_key
+from voicepaste.settings import Settings, get_api_key, GEMINI_MODEL_CHOICES, normalize_gemini_model
 from voicepaste.ui_settings import SettingsDialog
 from voicepaste.utils import logs_dir
 
@@ -178,6 +178,8 @@ class TrayApp(QtWidgets.QSystemTrayIcon):
 
     def _format_transcribe_error(self, error: Exception) -> str:
         msg = str(error)
+        if msg.startswith("Все модели"):
+            return msg
         msg_l = msg.lower()
         model = self.settings.gemini_model
         if (
@@ -384,21 +386,36 @@ class TrayApp(QtWidgets.QSystemTrayIcon):
     def _process_audio(self, wav_bytes: bytes):
         try:
             api_key = get_api_key()
-            transcriber = GeminiTranscriber(api_key=api_key, model=self.settings.gemini_model)
             t0 = time.perf_counter()
-            try:
-                text = transcriber.transcribe(wav_bytes)
-            finally:
-                transcriber.client.close()
+            models = [model for _, model in GEMINI_MODEL_CHOICES]
+            start = models.index(normalize_gemini_model(self.settings.gemini_model))
+            errors = []
+            for model in models[start:] + models[:start]:
+                transcriber = None
+                try:
+                    logger.info(f"transcribe_model={model}")
+                    transcriber = GeminiTranscriber(api_key=api_key, model=model)
+                    text = transcriber.transcribe(wav_bytes, max_retries=1)
+                    if not text or not text.strip():
+                        raise RuntimeError("Модель вернула пустой текст")
+                    logger.info(f"successful_model={model}")
+                    break
+                except Exception as error:
+                    logger.warning(f"Model failed, trying next: {model}: {error}")
+                    errors.append(f"{model}: {str(error)[:200]}")
+                finally:
+                    if transcriber:
+                        try:
+                            transcriber.client.close()
+                        except Exception as error:
+                            logger.warning(f"Client close failed: {error}")
+            else:
+                raise RuntimeError("Все модели не смогли распознать запись.\n" + "\n".join(errors))
             took_ms = int((time.perf_counter() - t0) * 1000)
             logger.info(f"processing_ms={took_ms}")
         except Exception as e:
             logger.error(f"Transcribe failed: {e}")
             self.transcribe_error_signal.emit(self._format_transcribe_error(e))
-            self._set_status("Idle")
-            return
-
-        if not text:
             self._set_status("Idle")
             return
 

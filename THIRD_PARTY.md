@@ -15,7 +15,7 @@ Windows предоставляет системные ICU и UCRT. Spec искл
 
 ## Corresponding sources and rebuilding
 
-VoicePaste application source and build scripts: https://github.com/Servideus/VoicePaste/tree/v1.1.4-beta
+VoicePaste application source and build scripts: https://github.com/Servideus/VoicePaste/tree/v1.1.5-beta
 
 - Qt 6.10.2 source: https://download.qt.io/official_releases/qt/6.10/6.10.2/single/qt-everywhere-src-6.10.2.tar.xz
 - PySide6 and Shiboken6 6.10.2 source: https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.10.2-src/pyside-setup-everywhere-src-6.10.2.tar.xz

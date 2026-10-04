@@ -30,7 +30,9 @@ class GeminiTranscriber:
     ):
         self.client = genai.Client(
             api_key=api_key,
-            http_options=types.HttpOptions(timeout=int(timeout_sec * 1000)),
+            http_options=types.HttpOptions(
+                timeout=int(timeout_sec * 1000),
+                retry_options=types.HttpRetryOptions(attempts=1)),
         )
         self._api_key = api_key
         self._model = normalize_gemini_model(model)

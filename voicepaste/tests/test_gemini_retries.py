@@ -49,6 +49,7 @@ def test_gemini_retries(monkeypatch):
     out = t.transcribe(b"RIFF....WAVE")
     assert out == "OK"
     assert options["http_options"].timeout == 30000
+    assert options["http_options"].retry_options.attempts == 1
     assert len(client.models.requests) == 3
     assert all(request["model"] == gm.DEFAULT_GEMINI_MODEL for request in client.models.requests)
 
